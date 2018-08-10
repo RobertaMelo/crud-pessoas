@@ -10,7 +10,7 @@ const headerProps = {
 
 const baseUrl = 'http://localhost:3001/users'
 const initialState = {
-    user: { name: '', email: '', telefone: '', whatsapp: '' },
+    pessoa: { name: '', email: '', telefone: '', whatsapp: '' },
     list: []
 }
 
@@ -25,30 +25,30 @@ export default class UserCrud extends Component {
     }
 
     clear() {
-        this.setState({ user: initialState.user })
+        this.setState({ pessoa: initialState.pessoa })
     }
 
     save() {
-        const user = this.state.user
-        const method = user.id ? 'put' : 'post'
-        const url = user.id ? `${baseUrl}/${user.id}` : baseUrl
-        axios[method](url, user)
+        const pessoa = this.state.pessoa
+        const method = pessoa.id ? 'put' : 'post'
+        const url = pessoa.id ? `${baseUrl}/${pessoa.id}` : baseUrl
+        axios[method](url, pessoa)
             .then(resp => {
                 const list = this.getUpdatedList(resp.data)
-                this.setState({ user: initialState.user, list })
+                this.setState({ pessoa: initialState.pessoa, list })
             })
     }
 
-    getUpdatedList(user, add = true) {
-        const list = this.state.list.filter(u => u.id !== user.id)
-        if(add) list.unshift(user)
+    getUpdatedList(pessoa, add = true) {
+        const list = this.state.list.filter(u => u.id !== pessoa.id)
+        if(add) list.unshift(pessoa)
         return list
     }
 
     updateField(event) {
-        const user = { ...this.state.user }
-        user[event.target.name] = event.target.value
-        this.setState({ user })
+        const pessoa = { ...this.state.pessoa }
+        pessoa[event.target.name] = event.target.value
+        this.setState({ pessoa })
     }
 
     renderForm() {
@@ -60,7 +60,7 @@ export default class UserCrud extends Component {
                             <label>Nome</label>
                             <input type="text" className="form-control"
                                 name="name"
-                                value={this.state.user.name}
+                                value={this.state.pessoa.name}
                                 onChange={e => this.updateField(e)}
                                 placeholder="Digite o nome..." />
                         </div>
@@ -71,7 +71,7 @@ export default class UserCrud extends Component {
                             <label>E-mail</label>
                             <input type="text" className="form-control"
                                 name="email"
-                                value={this.state.user.email}
+                                value={this.state.pessoa.email}
                                 onChange={e => this.updateField(e)}
                                 placeholder="Digite o e-mail..." />
                         </div>
@@ -84,7 +84,7 @@ export default class UserCrud extends Component {
                             <label>Telefone</label>
                             <input type="text" className="form-control"
                                 name="telefone"
-                                value={this.state.user.telefone}
+                                value={this.state.pessoa.telefone}
                                 onChange={e => this.updateField(e)}
                                 placeholder="Digite o telefone..." />
                         </div>
@@ -95,7 +95,7 @@ export default class UserCrud extends Component {
                             <label>WhatsApp</label>
                             <input type="text" className="form-control"
                                 name="whatsapp"
-                                value={this.state.user.whatsapp}
+                                value={this.state.pessoa.whatsapp}
                                 onChange={e => this.updateField(e)}
                                 placeholder="Digite o whatsapp..." />
                         </div>
@@ -122,13 +122,13 @@ export default class UserCrud extends Component {
         )
     }
 
-    load(user) {
-        this.setState({ user })
+    load(pessoa) {
+        this.setState({ pessoa })
     }
 
-    remove(user) {
-        axios.delete(`${baseUrl}/${user.id}`).then(resp => {
-            const list = this.getUpdatedList(user, false)
+    remove(pessoa) {
+        axios.delete(`${baseUrl}/${pessoa.id}`).then(resp => {
+            const list = this.getUpdatedList(pessoa, false)
             this.setState({ list })
         })
     }
@@ -154,21 +154,21 @@ export default class UserCrud extends Component {
     }
 
     renderRows() {
-        return this.state.list.map(user => {
+        return this.state.list.map(pessoa => {
             return (
-                <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                    <td>{user.telefone}</td>
-                    <td>{user.whatsapp}</td>
+                <tr key={pessoa.id}>
+                    <td>{pessoa.id}</td>
+                    <td>{pessoa.name}</td>
+                    <td>{pessoa.email}</td>
+                    <td>{pessoa.telefone}</td>
+                    <td>{pessoa.whatsapp}</td>
                     <td>
                         <button className="btn btn-primary"
-                            onClick={() => this.load(user)}>
+                            onClick={() => this.load(pessoa)}>
                             <i className="fa fa-pencil"></i>
                         </button>
                         <button className="btn btn-danger ml-2"
-                            onClick={() => this.remove(user)}>
+                            onClick={() => this.remove(pessoa)}>
                             <i className="fa fa-trash"></i>
                         </button>
                     </td>
