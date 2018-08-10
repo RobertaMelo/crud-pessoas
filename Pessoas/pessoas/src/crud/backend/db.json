@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 2,
+      "name": "Jhonatan Carvalho",
+      "telefone": "48 32553270",
+      "whatsapp": "48 991380804",
+      "email": "jhonatancarvalho@gmail.com"
+    },
+    {
+      "id": 3,
+      "name": "Roberta",
+      "telefone": "48 991380804",
+      "whatsapp": "48 991380804",
+      "email": "robertameelo91@gmail.com"
+    },
+    {
+      "name": "Rodrigo",
+      "email": "rodrigo@gmail.com",
+      "telefone": "489996506",
+      "whatsapp": "4899965698",
+      "id": 4
+    }
+  ]
+}
